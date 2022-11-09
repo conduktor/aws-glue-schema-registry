@@ -47,13 +47,10 @@
         </license>
     </licenses>
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://aws.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/conduktor/aws-glue-schema-registry</url>
         </repository>
     </distributionManagement>
     <scm>
@@ -263,6 +260,16 @@
         </plugins>
     </build>
     <profiles>
+        <profile>
+            <id>github</id>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub Packages</name>
+                    <url>https://maven.pkg.github.com/conduktor/aws-glue-schema-registry</url>
+                </repository>
+            </distributionManagement>
+        </profile>
         <profile>
             <id>publishing</id>
             <build>
