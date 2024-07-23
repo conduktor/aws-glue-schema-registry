@@ -32,7 +32,7 @@
     <parent>
         <groupId>software.amazon.glue</groupId>
         <artifactId>schema-registry-parent</artifactId>
-        <version>1.1.14</version>
+        <version>1.1.20</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -84,6 +84,10 @@
             <artifactId>kafka-clients</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.kjetland</groupId>
             <artifactId>mbknor-jackson-jsonschema_2.12</artifactId>
             <exclusions>
@@ -100,6 +104,13 @@
         <dependency>
             <groupId>com.github.erosb</groupId>
             <artifactId>everit-json-schema</artifactId>
+            <version>1.14.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
@@ -131,6 +142,16 @@
 	    <artifactId>kotlin-scripting-compiler-embeddable</artifactId>
 	    <version>${kotlin.version}</version>
 	</dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio-fakefilesystem</artifactId>
+            <version>3.2.0</version>
+        </dependency>
 	<dependency>
 	    <groupId>org.jetbrains.kotlinx</groupId>
 	    <artifactId>kotlinx-serialization-core-jvm</artifactId>
@@ -151,6 +172,10 @@
                 <exclusion>
                     <groupId>com.squareup.wire</groupId>
                     <artifactId>wire-grpc-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.charleskorn.kaml</groupId>
+                    <artifactId>kaml</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -206,6 +231,12 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
+        </dependency>
+        <!-- Temporarily adding dependency on a transitive dependency to fix security bug in underlying library. Remove when dependency is upgraded. -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
         </dependency>
     </dependencies>
     <build>

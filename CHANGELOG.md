@@ -63,3 +63,24 @@ GlueSchemaRegistryKafkaSerializer/GlueSchemaRegistryKafkaDeserializer.
 ## Release 1.1.14
 * Upgraded Protobuf dependency version to prevent a CVE
 * Upgraded everit-json-schema dependency version to prevent a CVE
+
+## Release 1.1.15
+* Upgrade Avro, Apicurio and Localhost utils versions
+
+## Release 1.1.16
+* Upgraded Wire version
+* Excluded some transitive dependencies that are having vulnerabilities
+
+## Release 1.1.17
+* Upgraded kafka dependencies version
+
+## Release 1.1.18
+* Add a dummy class in the serializer-deserializer-msk-iam module for javadoc and source jar generation
+* Upgraded Avro and Json dependencies version
+* Upgraded AWS SDK v1 and v2 versions to fix vulnerabilities
+
+## Release 1.1.19
+* Upgraded dependency versions to remove ION dependencies
+
+## Release 1.1.20
+* Upgrade the dependency version to remove commons:compress dependency

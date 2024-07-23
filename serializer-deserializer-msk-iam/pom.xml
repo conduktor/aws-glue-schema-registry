@@ -1,6 +1,6 @@
 <!--
 /*
- * Copyright 2022 Amazon.com, Inc. or its affiliates.
+ * Copyright 2020 Amazon.com, Inc. or its affiliates.
  * Licensed under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -16,8 +16,19 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>${parent.groupId}</groupId>
+    <artifactId>schema-registry-serde-msk-iam</artifactId>
+    <name>AWS Glue Schema Registry Serializer Deserializer with MSK IAM Authentication client</name>
+    <description>The AWS Glue Schema Registry Serializer/Deserializer enables Java developers to easily integrate
+        their Apache Kafka and AWS Kinesis applications with AWS Glue Schema Registry. MSK IAM Authentication client allows
+        clients to authenticate to Amazon MSK using IAM.
+    </description>
+    <url>https://aws.amazon.com/glue</url>
+    <version>${parent.version}</version>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>software.amazon.glue</groupId>
@@ -25,16 +36,6 @@
         <version>1.1.20</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <groupId>${parent.groupId}</groupId>
-    <artifactId>protobuf-kafkaconnect-converter</artifactId>
-    <version>${parent.version}</version>
-    <name>AWS Glue Schema Registry Kafka Connect Converter for Protobuf</name>
-    <description>The AWS Glue Schema Registry Kafka Connect Converter enables Java developers to easily integrate
-        their Kafka Connect applications with AWS Glue Schema Registry for Protobuf schemas.
-    </description>
-    <packaging>jar</packaging>
-    <url>https://aws.amazon.com/glue</url>
 
     <distributionManagement>
         <snapshotRepository>
@@ -46,12 +47,6 @@
             <url>https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-    <scm>
-        <connection>scm:git:https://github.com/aws/aws-glue-schema-registry.git</connection>
-        <developerConnection>scm:git:git@github.com:aws/aws-glue-schema-registry.git</developerConnection>
-        <url>https://github.com/awslabs/aws-glue-schema-registry.git</url>
-    </scm>
-
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -59,64 +54,24 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/aws/aws-glue-schema-registry.git</connection>
+        <developerConnection>scm:git:git@github.com:aws/aws-glue-schema-registry.git</developerConnection>
+        <url>https://github.com/awslabs/aws-glue-schema-registry.git</url>
+    </scm>
 
     <dependencies>
+        <dependency>
+            <groupId>software.amazon.msk</groupId>
+            <artifactId>aws-msk-iam-auth</artifactId>
+            <version>${aws.msk.iam.auth}</version>
+        </dependency>
         <dependency>
             <groupId>${parent.groupId}</groupId>
             <artifactId>schema-registry-serde</artifactId>
             <version>${parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>connect-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>${protobuf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.apicurio</groupId>
-            <artifactId>apicurio-registry-protobuf-schema-utilities</artifactId>
-            <version>${apicurio-registry.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java-util</artifactId>
-            <version>${protobuf.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -146,6 +101,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Generate the test artifacts for sharing the test data -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
@@ -156,6 +124,7 @@
                         <id>gencode</id>
                         <phase>generate-sources</phase>
                         <goals>
+                            <goal>compile</goal>
                             <goal>test-compile</goal>
                         </goals>
                         <configuration>
@@ -186,51 +155,6 @@
                                     </excludes>
                                 </resource>
                             </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
-                <configuration>
-                    <excludes>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>PACKAGE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>INSTRUCTION</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.75</minimum>
-                                        </limit>
-                                    </limits>
-                                    <excludes>
-                                    </excludes>
-                                </rule>
-                            </rules>
                         </configuration>
                     </execution>
                 </executions>
