@@ -43,6 +43,7 @@ import java.util.stream.Collectors;
 import static com.google.common.base.CaseFormat.LOWER_UNDERSCORE;
 import static com.google.common.base.CaseFormat.UPPER_CAMEL;
 import static com.google.protobuf.DescriptorProtos.*;
+import static com.squareup.wire.schema.Options.ONEOF_OPTIONS;
 
 /**
  * @author Fabian Martinez, Ravindranath Kakarla, Carles Arnal
@@ -584,7 +585,7 @@ public class FileDescriptorUtils {
      * This method generates the synthetic one-of from a Proto3 optional field.
      */
     private static OneOf getProto3OptionalField(Field field) {
-        return new OneOf("_" + field.getName(), "", Collections.singletonList(field));
+        return new OneOf("_" + field.getName(), "", Collections.singletonList(field), DEFAULT_LOCATION, new Options(ONEOF_OPTIONS, Collections.emptyList()));
     }
 
     private static EnumDescriptorProto enumElementToProto(EnumType enumElem) {
@@ -852,7 +853,7 @@ public class FileDescriptorUtils {
             int start = extensionRange.getStart();
             int end = extensionRange.getEnd() - 1;
             values.add(new IntRange(start, end));
-            ExtensionsElement extensionsElement = new ExtensionsElement(DEFAULT_LOCATION, "", values);
+            ExtensionsElement extensionsElement = new ExtensionsElement(DEFAULT_LOCATION, "", values, Collections.emptyList());
             extensions.add(extensionsElement);
         }
         ImmutableList.Builder<OptionElement> options = ImmutableList.builder();
@@ -878,12 +879,13 @@ public class FileDescriptorUtils {
                     .filter(e -> e.getValue().build().size() != 0)
                     .map(e -> toOneof(e.getKey(), e.getValue())).collect(Collectors.toList()),
                 extensions.build(),
+                Collections.emptyList(),
                 Collections.emptyList()
         );
     }
 
     private static OneOfElement toOneof(String name, ImmutableList.Builder<FieldElement> fields) {
-        return new OneOfElement(name, "", fields.build(), Collections.emptyList(), Collections.emptyList());
+        return new OneOfElement(name, "", fields.build(), Collections.emptyList(), Collections.emptyList(), DEFAULT_LOCATION);
     }
 
     private static EnumElement toEnum(EnumDescriptorProto ed) {

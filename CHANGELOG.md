@@ -84,3 +84,9 @@ GlueSchemaRegistryKafkaSerializer/GlueSchemaRegistryKafkaDeserializer.
 
 ## Release 1.1.20
 * Upgrade the dependency version to remove commons:compress dependency
+
+## Release 1.1.21
+* Upgraded Avro dependencies version to fix vulnerabilities
+
+## Release 1.1.22
+* Upgraded protobuf dependencies version to fix vulnerabilities
