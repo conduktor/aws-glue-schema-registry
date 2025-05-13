@@ -27,4 +27,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Publish
-        run: mvn -P github --file pom.xml publish
+        run: mvn --batch-mode -P github --file pom.xml deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
