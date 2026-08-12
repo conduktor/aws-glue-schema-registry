@@ -267,7 +267,7 @@ public class KafkaHelper {
         List<ConsumerRecord<String, T>> consumerRecords = new ArrayList<>();
         final long now = System.currentTimeMillis();
         while (System.currentTimeMillis() - now < CONSUMER_RUNTIME.toMillis()) {
-            final ConsumerRecords<String, T> recordsReceived = consumer.poll(CONSUMER_RUNTIME.toMillis());
+            final ConsumerRecords<String, T> recordsReceived = consumer.poll(CONSUMER_RUNTIME);
             int i = 0;
             for (final ConsumerRecord<String, T> record : recordsReceived) {
                 final String key = record.key();
