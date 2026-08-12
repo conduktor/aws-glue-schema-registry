@@ -21,7 +21,7 @@
 
     <groupId>${parent.groupId}</groupId>
     <artifactId>schema-registry-examples</artifactId>
-    <version>${parent.version}</version>
+    <version>1.1.27-cdk2</version>
     <name>AWS Glue Schema Registry examples</name>
     <description>The AWS Glue Schema examples has sample code for using Schema Registry with different applications.
     </description>
@@ -31,7 +31,7 @@
     <parent>
         <groupId>software.amazon.glue</groupId>
         <artifactId>schema-registry-parent</artifactId>
-        <version>1.1.27-cdk</version>
+        <version>1.1.27-cdk2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>${parent.groupId}</groupId>
             <artifactId>schema-registry-serde</artifactId>
-            <version>${parent.version}</version>
+            <version>1.1.27-cdk2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
