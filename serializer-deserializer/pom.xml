@@ -26,13 +26,13 @@
         their Apache Kafka and AWS Kinesis applications with AWS Glue Schema Registry
     </description>
     <url>https://aws.amazon.com/glue</url>
-    <version>${parent.version}</version>
+    <version>1.1.27-cdk2</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>software.amazon.glue</groupId>
         <artifactId>schema-registry-parent</artifactId>
-        <version>1.1.27-cdk</version>
+        <version>1.1.27-cdk2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>${parent.groupId}</groupId>
             <artifactId>schema-registry-common</artifactId>
-            <version>${parent.version}</version>
+            <version>1.1.27-cdk2</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
@@ -89,8 +89,8 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.kjetland</groupId>
-            <artifactId>mbknor-jackson-jsonschema_2.12</artifactId>
+            <groupId>io.yokota</groupId>
+            <artifactId>mbknor-jackson-jsonschema-java8</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>io.github.classgraph</groupId>

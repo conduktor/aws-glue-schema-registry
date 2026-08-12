@@ -21,7 +21,7 @@
 
     <groupId>${parent.groupId}</groupId>
     <artifactId>schema-registry-integration-tests</artifactId>
-    <version>${parent.version}</version>
+    <version>1.1.27-cdk2</version>
     <name>AWS Glue Schema Registry Integration Tests</name>
     <description>The AWS Glue Schema Registry tests would do a sanity check for the schema registry library.
     </description>
@@ -31,7 +31,7 @@
     <parent>
         <groupId>software.amazon.glue</groupId>
         <artifactId>schema-registry-parent</artifactId>
-        <version>1.1.27-cdk</version>
+        <version>1.1.27-cdk2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 

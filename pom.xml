@@ -21,7 +21,7 @@
 
     <groupId>software.amazon.glue</groupId>
     <artifactId>schema-registry-parent</artifactId>
-    <version>1.1.27-cdk</version>
+    <version>1.1.27-cdk2</version>
     <packaging>pom</packaging>
     <name>AWS Glue Schema Registry Library</name>
     <description>The AWS Glue Schema Registry Library for Java enables Java developers to easily integrate their
@@ -79,10 +79,10 @@
         <glue.schema.registry.groupId>software.amazon.glue</glue.schema.registry.groupId>
         <aws.sdk.v2.version>2.32.25</aws.sdk.v2.version>
         <aws.sdk.v1.version>1.12.782</aws.sdk.v1.version>
-        <kafka.scala.version>2.12</kafka.scala.version>
-        <kafka.version>3.6.1</kafka.version>
+        <kafka.scala.version>2.13</kafka.scala.version>
+        <kafka.version>4.3.1</kafka.version>
         <avro.version>1.11.4</avro.version>
-        <mbknor.jsonschema.converter.version>1.0.39</mbknor.jsonschema.converter.version>
+        <mbknor.jsonschema.converter.version>1.0.39.3</mbknor.jsonschema.converter.version>
         <everit.json.schema.version>1.14.5</everit.json.schema.version>
         <classgraph.version>4.8.120</classgraph.version>
         <commons.lang.version>3.8.1</commons.lang.version>
@@ -91,7 +91,7 @@
         <proto-plugin.version>0.6.1</proto-plugin.version>
         <protobuf.version>4.35.1</protobuf.version>
         <kotlin.version>2.0.21</kotlin.version>
-        <square-wireschema.version>5.3.1</square-wireschema.version>
+        <square-wireschema.version>5.5.0</square-wireschema.version>
         <apicurio-registry.version>2.1.3.Final</apicurio-registry.version>
         <slf4j.version>1.7.30</slf4j.version>
         <log4j.version>2.17.1</log4j.version>
@@ -256,8 +256,8 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.kjetland</groupId>
-                <artifactId>mbknor-jackson-jsonschema_${kafka.scala.version}</artifactId>
+                <groupId>io.yokota</groupId>
+                <artifactId>mbknor-jackson-jsonschema-java8</artifactId>
                 <version>${mbknor.jsonschema.converter.version}</version>
             </dependency>
             <!-- Temporarily adding dependency on a transitive dependency to fix security bug in underlying library. Remove when dependency is upgraded. -->
